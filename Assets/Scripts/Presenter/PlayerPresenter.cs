@@ -1,26 +1,28 @@
-﻿using Fighter.Controller;
+﻿using Fighter.Action;
 using Fighter.Model;
 using Fighter.View;
 using UniRx;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace Fighter.Presenter {
-    public class PlayerPresenter {
+    public class PlayerPresenter : IPresenter {
         private readonly Player _model;
+        private readonly ActionHandler _actionHandler;
 
-        public PlayerPresenter(InputController inputController, Player model, PlayerView view) {
-            inputController.Movement.Subscribe(Movement);
-            
+        public PlayerPresenter(Player model, PlayerView view, ActionHandler actionHandler) {
             _model = model;
             _model.Position.Subscribe(view.UpdatePosition);
+            _actionHandler = actionHandler;
         }
 
-        private void Movement(InputValue value) {
-            var inputMovement = value.Get<Vector2>();
-            var direction = new Vector3(inputMovement.x, inputMovement.y, 0);
-            var position = _model.Position.Value + direction * Time.deltaTime;
-            _model.Position.SetValueAndForceNotify(position);
+        private void Movement() {
+            var direction = _model.Direction.Value;
+            if (direction.sqrMagnitude > 0) {
+                _actionHandler.Enqueue(new MoveAction(_model));
+            }
+        }
+
+        public void Update() {
+            Movement();
         }
     }
 }
