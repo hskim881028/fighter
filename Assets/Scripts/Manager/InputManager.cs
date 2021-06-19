@@ -3,8 +3,8 @@ using Fighter.Model;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Fighter.Controller {
-    public class InputController : MonoBehaviour {
+namespace Fighter.Manager {
+    public class InputManager : MonoBehaviour {
         private ActionHandler _actionHandler;
         private Character _character;
 
