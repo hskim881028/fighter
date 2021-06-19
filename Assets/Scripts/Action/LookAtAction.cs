@@ -15,6 +15,10 @@ namespace Fighter.Action {
             var position = _character.Position.Value;
             var speed = _character.Speed.Value;
             _character.Position.Value = position + _direction * (speed * Time.deltaTime);
+
+            if (_direction.sqrMagnitude > 0) {
+                _character.Look.Value = _direction;
+            }
         }
     }                                                                                       
 }

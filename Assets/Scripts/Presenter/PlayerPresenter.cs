@@ -11,6 +11,7 @@ namespace Fighter.Presenter {
         public PlayerPresenter(Player model, PlayerView view, ActionHandler actionHandler) {
             _model = model;
             _model.Position.Subscribe(view.UpdatePosition);
+            _model.Look.Subscribe(view.UpdateLookAt);
             _actionHandler = actionHandler;
         }
 
