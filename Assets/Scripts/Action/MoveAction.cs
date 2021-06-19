@@ -1,19 +1,18 @@
-﻿using Fighter.Model;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fighter.Action {
     public class MoveAction : IAction {
-        private readonly Character _character;
+        private readonly Model.Model _model;
 
-        public MoveAction(Character character) {
-            _character = character;
+        public MoveAction(Model.Model model) {
+            _model = model;
         }
 
         public void Execute() {
-            var speed = _character.Speed.Value;
-            var direction = _character.Direction.Value;
-            var position = _character.Position.Value;
-            _character.Position.Value = position + direction * (speed * Time.deltaTime);
+            var speed = _model.Speed.Value;
+            var direction = _model.Direction.Value;
+            var position = _model.Position.Value;
+            _model.Position.Value = position + direction * (speed * Time.deltaTime);
         }
     }
 }

@@ -5,13 +5,29 @@ using UniRx;
 
 namespace Fighter.Presenter {
     public class PlayerPresenter : IPresenter {
-        private readonly Player _model;
+        private readonly CharacterModel _model;
         private readonly ActionHandler _actionHandler;
 
-        public PlayerPresenter(Player model, PlayerView view, ActionHandler actionHandler) {
+        public PlayerPresenter(CharacterModel model, PlayerView view, ActionHandler actionHandler) {
             _model = model;
-            _model.Position.Subscribe(view.UpdatePosition);
-            _model.Look.Subscribe(view.UpdateLookAt);
+            _model.Position.Subscribe(x => {
+                if (view.isActiveAndEnabled) {
+                    view.UpdatePosition(x);
+                }
+            });
+
+            _model.Look.Subscribe(x => {
+                if (view.isActiveAndEnabled) {
+                    view.UpdateLookAt(x);
+                }
+            });
+
+            _model.Active.Subscribe(x => {
+                if (view.isActiveAndEnabled) {
+                    view.UpdateActive(x);
+                }
+            });
+
             _actionHandler = actionHandler;
         }
 
