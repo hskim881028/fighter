@@ -4,6 +4,7 @@ using UnityEngine;
 namespace Fighter.Action {
     public class MoveAction : IAction {
         private readonly Character _character;
+
         public MoveAction(Character character) {
             _character = character;
         }

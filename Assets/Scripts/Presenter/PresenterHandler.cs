@@ -7,6 +7,7 @@ namespace Fighter.Presenter {
         public void Add(IPresenter presenter) {
             _presenters.Add(presenter);
         }
+
         public void UpdateAll() {
             foreach (var presenter in _presenters) {
                 presenter.Update();

@@ -7,7 +7,7 @@ namespace Fighter.Action {
         public void Enqueue(IAction action) {
             _Actions.Enqueue(action);
         }
-        
+
         public void ExecuteAll() {
             while (_Actions.Count > 0) {
                 var action = _Actions.Dequeue();
