@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 530750615}
   - component: {fileID: 530750614}
   m_Layer: 0
-  m_Name: ObjectManager
+  m_Name: CloneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 333808639}
-  ObjectManager: {fileID: 530750614}
+  cloneManager: {fileID: 530750614}
 --- !u!1 &1987660194
 GameObject:
   m_ObjectHideFlags: 0

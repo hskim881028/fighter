@@ -5,10 +5,10 @@ using UniRx;
 
 namespace Fighter.Presenter {
     public class PlayerPresenter : IPresenter {
-        private readonly CharacterModel _model;
+        private readonly Character _model;
         private readonly ActionHandler _actionHandler;
 
-        public PlayerPresenter(CharacterModel model, PlayerView view, ActionHandler actionHandler) {
+        public PlayerPresenter(Character model, PlayerView view, ActionHandler actionHandler) {
             _model = model;
             _model.Position.Subscribe(x => {
                 if (view.isActiveAndEnabled) {

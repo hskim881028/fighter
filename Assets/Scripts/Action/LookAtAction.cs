@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace Fighter.Action {
     public class LookAtAction : IAction {
-        private readonly CharacterModel _characterModel;
+        private readonly Character _character;
         private readonly Vector3 _direction;
 
-        public LookAtAction(CharacterModel characterModel, Vector3 direction) {
-            _characterModel = characterModel;
+        public LookAtAction(Character character, Vector3 direction) {
+            _character = character;
             _direction = direction;
         }
 
         public void Execute() {
-            _characterModel.Direction.Value = _direction;
-            var position = _characterModel.Position.Value;
-            var speed = _characterModel.Speed.Value;
-            _characterModel.Position.Value = position + _direction * (speed * Time.deltaTime);
+            _character.Direction.Value = _direction;
+            var position = _character.Position.Value;
+            var speed = _character.Speed.Value;
+            _character.Position.Value = position + _direction * (speed * Time.deltaTime);
 
             if (_direction.sqrMagnitude > 0) {
-                _characterModel.Look.Value = _direction;
+                _character.Look.Value = _direction;
             }
         }
     }

@@ -11,8 +11,8 @@ namespace Fighter.Manager {
     public class CloneManager : MonoBehaviour {
         private readonly Dictionary<int, Clone.Clone> _clones = new Dictionary<int, Clone.Clone>();
 
-        public CharacterModel SpawnPlayer(ActionHandler actionHandler) {
-            var model = new CharacterModel(Vector3.zero, 5.0f, 10);
+        public Character SpawnPlayer(ActionHandler actionHandler) {
+            var model = new Character(Vector3.zero, 5.0f, 10);
 
             if (TryGetClone(CloneType.Player, out var clone)) {
                 clone.OnInitialize(model);
@@ -22,7 +22,7 @@ namespace Fighter.Manager {
                 var player = Instantiate(prefab, Vector3.zero, Quaternion.identity);
                 var view = player.GetComponent<PlayerView>();
                 var id = _clones.Count;
-                model = new CharacterModel(id, Vector3.zero, 5.0f, 10);
+                model = new Character(id, Vector3.zero, 5.0f, 10);
                 var presenter = new PlayerPresenter(model, view, actionHandler);
                 var newClone = new Clone.Clone(CloneType.Player, model, presenter, view);
                 _clones.Add(id, newClone);
