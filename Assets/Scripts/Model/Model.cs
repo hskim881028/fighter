@@ -19,12 +19,12 @@ namespace Fighter.Model {
             Speed.Value = speed;
             HP.Value = hp;
         }
-
-        protected Model(Vector3 startPosition, float speed, int hp) {
-            Active.Value = true;
-            Position.Value = startPosition;
-            Speed.Value = speed;
-            HP.Value = hp;
+        
+        public void Initialize(Model model) {
+            Position.Value = model.Position.Value;
+            Active.Value = model.Active.Value;
+            Direction.Value = model.Direction.Value;
+            Speed.Value = Speed.Value;
         }
     }
 }

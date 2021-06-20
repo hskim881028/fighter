@@ -18,5 +18,9 @@ namespace Fighter.Manager {
             var direction = new Vector3(inputMovement.x, inputMovement.y, 0);
             _actionHandler.Enqueue(new LookAtAction(_character, direction));
         }
+
+        private void OnAttack() {
+            _actionHandler.Enqueue(new AttackAction(_character));
+        }
     }
 }

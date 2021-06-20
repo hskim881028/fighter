@@ -12,7 +12,7 @@ namespace Fighter.Action {
             var speed = _model.Speed.Value;
             var direction = _model.Direction.Value;
             var position = _model.Position.Value;
-            _model.Position.Value = position + direction * (speed * Time.deltaTime);
+            _model.Position.Value = position + direction.normalized * (speed * Time.deltaTime);
         }
     }
 }

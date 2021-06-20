@@ -1,51 +1,51 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Clone;
 using Fighter.Action;
+using Fighter.Clone;
 using Fighter.Model;
-using Fighter.Presenter;
-using Fighter.View;
 using UnityEngine;
 
 namespace Fighter.Manager {
-    public class CloneManager : MonoBehaviour {
-        private readonly Dictionary<int, Clone.Clone> _clones = new Dictionary<int, Clone.Clone>();
+    public static class CloneManager {
+        private static CloneSpawner _cloneSpawner;
+        private static ActionHandler _actionHandler;
 
-        public Character SpawnPlayer(ActionHandler actionHandler) {
-            var model = new Character(Vector3.zero, 5.0f, 10);
+        private static readonly Dictionary<int, Clone.Clone> _clones = new Dictionary<int, Clone.Clone>();
+        public static int Count => _clones.Count;
 
-            if (TryGetClone(CloneType.Player, out var clone)) {
-                clone.OnInitialize(model);
-            }
-            else {
-                var prefab = ResourceManager.GetPlayer(0);
-                var player = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                var view = player.GetComponent<PlayerView>();
-                var id = _clones.Count;
-                model = new Character(id, Vector3.zero, 5.0f, 10);
-                var presenter = new PlayerPresenter(model, view, actionHandler);
-                var newClone = new Clone.Clone(CloneType.Player, model, presenter, view);
-                _clones.Add(id, newClone);
-            }
-
-            return model;
+        public static void Initialize(CloneSpawner cloneSpawner, ActionHandler actionHandler) {
+            _cloneSpawner = cloneSpawner;
+            _actionHandler = actionHandler;
         }
 
-        public void UpdateAll() {
+        public static void UpdateAll() {
             foreach (var clone in _clones) {
                 clone.Value.Update();
             }
         }
 
-        public void Destroy(int id) {
+        public static void Add(int id, Clone.Clone clone) {
+            _clones.Add(id, clone);
+        }
+
+        public static void Destroy(int id) {
             if (_clones.ContainsKey(id)) {
                 _clones[id].Destroy();
             }
         }
 
-        private bool TryGetClone(CloneType type, out Clone.Clone clone) {
-            clone = _clones.FirstOrDefault(x => x.Value.Type.Equals(type) && !x.Value.IsActive).Value;
-            return clone != null;
+        public static bool TryGetClone(CloneType type, out KeyValuePair<int, Clone.Clone> pair) {
+            pair = _clones.FirstOrDefault(x => x.Value.Type.Equals(type) && !x.Value.IsActive);
+            return pair.Value != null;
+        }
+
+        public static Character SpawnPlayer() {
+            _cloneSpawner.SpawnPlayer(_actionHandler, out var model);
+            return model;
+        }
+
+        public static void SpawnProjectile(Vector3 startPosition, Vector3 direction, float speed, float range) {
+            _cloneSpawner.SpawnProjectile(_actionHandler, startPosition, direction, speed, range);
         }
     }
 }

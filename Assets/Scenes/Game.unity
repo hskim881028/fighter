@@ -208,7 +208,7 @@ GameObject:
   - component: {fileID: 530750615}
   - component: {fileID: 530750614}
   m_Layer: 0
-  m_Name: CloneManager
+  m_Name: CloneSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 530750613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 215f1ce0a12c467e84900db98004a656, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b00de71a1d54b138e930b1be3602fac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &530750615
@@ -534,7 +534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputManager: {fileID: 333808639}
-  cloneManager: {fileID: 530750614}
+  cloneSpawner: {fileID: 530750614}
 --- !u!1 &1987660194
 GameObject:
   m_ObjectHideFlags: 0

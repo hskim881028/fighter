@@ -23,10 +23,21 @@ namespace Fighter.Manager {
         }
 
         public static GameObject GetPlayer(int id) {
-            var datas = Get<PlayerScriptableObject>();
+            var datas = Get<PrefabScriptableObject>();
             var data = datas.players[id];
             if (data == null) {
                 Debug.LogError($"Player{id} is not exist !");
+                return null;
+            }
+
+            return data;
+        }
+
+        public static GameObject GetProjectile(int id) {
+            var datas = Get<PrefabScriptableObject>();
+            var data = datas.projectiles[id];
+            if (data == null) {
+                Debug.LogError($"Projectile{id} is not exist !");
                 return null;
             }
 

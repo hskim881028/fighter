@@ -1,27 +1,23 @@
 ﻿using Fighter.Action;
 using Fighter.Model;
-using Fighter.View;
 using UniRx;
+using UnityEngine;
 
 namespace Fighter.Presenter {
-    public class PlayerPresenter : IPresenter {
-        private readonly Character _model;
+    public class ProjectilePresenter : IPresenter {
+        private readonly Projectile _model;
         private readonly ActionHandler _actionHandler;
 
-        public PlayerPresenter(Character model, PlayerView view, ActionHandler actionHandler) {
+        private Vector3 startPosition;
+
+        public ProjectilePresenter(Projectile model, View.View view, ActionHandler actionHandler) {
             _model = model;
             _model.Position.Subscribe(x => {
                 if (view.isActiveAndEnabled) {
                     view.UpdatePosition(x);
                 }
             });
-
-            _model.Look.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdateLookAt(x);
-                }
-            });
-
+            
             _model.Active.Subscribe(x => {
                 if (view.isActiveAndEnabled) {
                     view.UpdateActive(x);
@@ -29,20 +25,26 @@ namespace Fighter.Presenter {
             });
 
             _actionHandler = actionHandler;
+            startPosition = _model.Position.Value;
         }
-
+        
         public void Respawn(Model.Model model) {
+            startPosition = model.Position.Value;
             _model.Initialize(model);
         }
 
         public void Update() {
+            Destroy();
             Movement();
         }
 
         private void Movement() {
-            var direction = _model.Direction.Value;
-            if (direction.sqrMagnitude > 0) {
-                _actionHandler.Enqueue(new MoveAction(_model));
+            _actionHandler.Enqueue(new MoveAction(_model));
+        }
+
+        private void Destroy() {
+            if (Vector3.Distance(startPosition, _model.Position.Value) > _model.Range) {
+                _actionHandler.Enqueue(new DestroyAction(_model));
             }
         }
     }
