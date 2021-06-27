@@ -3,6 +3,7 @@ using System.Linq;
 using Fighter.Action;
 using Fighter.Clone;
 using Fighter.Model;
+using Fighter.Type;
 using UnityEngine;
 
 namespace Fighter.Manager {
@@ -34,18 +35,18 @@ namespace Fighter.Manager {
             }
         }
 
-        public static bool TryGetClone(CloneType type, out KeyValuePair<int, Clone.Clone> pair) {
+        public static bool TryGetClone(ResourceType type, out KeyValuePair<int, Clone.Clone> pair) {
             pair = _clones.FirstOrDefault(x => x.Value.Type.Equals(type) && !x.Value.IsActive);
             return pair.Value != null;
         }
 
         public static Character SpawnPlayer() {
-            _cloneSpawner.SpawnPlayer(_actionHandler, out var model);
+            CloneSpawner.SpawnPlayer(_actionHandler, out var model);
             return model;
         }
 
         public static void SpawnProjectile(Vector3 startPosition, Vector3 direction, float speed, float range) {
-            _cloneSpawner.SpawnProjectile(_actionHandler, startPosition, direction, speed, range);
+            CloneSpawner.SpawnProjectile(_actionHandler, startPosition, direction, speed, range);
         }
     }
 }

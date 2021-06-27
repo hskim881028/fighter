@@ -10,9 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2853074920b140dbb9c34f69723c6bb2, type: 3}
-  m_Name: Prefabs
+  m_Name: Projectile
   m_EditorClassIdentifier: 
-  players:
-  - {fileID: 4541917908774003043, guid: fdc744b97692ca843a2ad86c357f215e, type: 3}
-  projectiles:
+  data:
   - {fileID: 8490657334456280852, guid: b999cd0364204ef4385d6d38f615cc16, type: 3}

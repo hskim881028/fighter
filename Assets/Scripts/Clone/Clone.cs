@@ -1,4 +1,5 @@
 ﻿using Fighter.Presenter;
+using Fighter.Type;
 
 namespace Fighter.Clone {
     public class Clone {
@@ -6,7 +7,7 @@ namespace Fighter.Clone {
         private readonly View.View _view;
         private readonly IPresenter _presenter;
 
-        public Clone(CloneType type, Model.Model model, IPresenter presenter, View.View view) {
+        public Clone(ResourceType type, Model.Model model, IPresenter presenter, View.View view) {
             IsActive = true;
             Type = type;
             _model = model;
@@ -15,7 +16,7 @@ namespace Fighter.Clone {
         }
 
         public bool IsActive { get; private set; }
-        public CloneType Type { get; }
+        public ResourceType Type { get; }
 
         public void Respawn(int id, Model.Model model) {
             _view.gameObject.SetActive(true);

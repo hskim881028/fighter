@@ -1,47 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Fighter.ScriptableObject;
 using UnityEngine;
 using System.Linq;
+using Fighter.Type;
 
 namespace Fighter.Manager {
     public static class ResourceManager {
-        private static readonly List<UnityEngine.ScriptableObject> Resources = new List<UnityEngine.ScriptableObject>();
+        private static readonly Dictionary<ResourceType, List<GameObject>> Resources =
+            new Dictionary<ResourceType, List<GameObject>>();
 
         public static void Initialize() {
-            var res = UnityEngine.Resources.LoadAll<UnityEngine.ScriptableObject>("ScriptableObjects/");
-            Resources.AddRange(res);
+            var scriptableObjects = UnityEngine.Resources.LoadAll<UnityEngine.ScriptableObject>("ScriptableObjects/");
+            var prefabs = scriptableObjects.Cast<PrefabScriptableObject>();
+            foreach (var prefab in prefabs) {
+                var type = (ResourceType) Enum.Parse(typeof(ResourceType), prefab.name);
+                Resources.Add(type, prefab.data);
+            }
         }
 
-        private static T Get<T>() {
-            var result = Resources.FirstOrDefault(x => x is T);
-            if (result != null && result is T t) {
-                return t;
+        public static GameObject GetPrefab(ResourceType type, int id) {
+            try {
+                return Resources[type][id];
             }
-
-            Debug.LogError($"{typeof(T)} is not exist !");
-            return default;
-        }
-
-        public static GameObject GetPlayer(int id) {
-            var datas = Get<PrefabScriptableObject>();
-            var data = datas.players[id];
-            if (data == null) {
-                Debug.LogError($"Player{id} is not exist !");
-                return null;
+            catch (Exception e) {
+                Console.WriteLine(e);
+                throw;
             }
-
-            return data;
-        }
-
-        public static GameObject GetProjectile(int id) {
-            var datas = Get<PrefabScriptableObject>();
-            var data = datas.projectiles[id];
-            if (data == null) {
-                Debug.LogError($"Projectile{id} is not exist !");
-                return null;
-            }
-
-            return data;
         }
     }
 }
