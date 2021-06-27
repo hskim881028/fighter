@@ -1,50 +1,40 @@
 ﻿using Fighter.Action;
 using Fighter.Model;
-using UniRx;
+using Fighter.View;
 using UnityEngine;
 
 namespace Fighter.Presenter {
-    public class ProjectilePresenter : IPresenter {
-        private readonly Projectile _model;
-        private readonly ActionHandler _actionHandler;
-
+    public class ProjectilePresenter : Presenter<Projectile, ProjectileView> {
+        private Projectile _projectile;
         private Vector3 startPosition;
 
-        public ProjectilePresenter(Projectile model, View.View view, ActionHandler actionHandler) {
-            _model = model;
-            _model.Position.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdatePosition(x);
-                }
-            });
-            
-            _model.Active.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdateActive(x);
-                }
-            });
-
-            _actionHandler = actionHandler;
-            startPosition = _model.Position.Value;
+        public ProjectilePresenter(ActionHandler actionHandler, Model.Model model, View.View view)
+            : base(actionHandler, model, view) {
         }
-        
-        public void Respawn(Model.Model model) {
+
+        public override void Initialize() {
+            base.Initialize();
+            _projectile = _model as Projectile;
+            startPosition = _projectile.Position.Value;
+        }
+
+        public override void Respawn(int id, Model.Model model) {
             startPosition = model.Position.Value;
-            _model.Initialize(model);
+            _projectile.Initialize(id, model);
         }
 
-        public void Update() {
+        public override void Update() {
             Destroy();
             Movement();
         }
 
         private void Movement() {
-            _actionHandler.Enqueue(new MoveAction(_model));
+            _actionHandler.Enqueue(new MoveAction(_projectile));
         }
 
         private void Destroy() {
-            if (Vector3.Distance(startPosition, _model.Position.Value) > _model.Range) {
-                _actionHandler.Enqueue(new DestroyAction(_model));
+            if (Vector3.Distance(startPosition, _projectile.Position.Value) > _projectile.Range) {
+                _actionHandler.Enqueue(new DestroyAction(_projectile));
             }
         }
     }

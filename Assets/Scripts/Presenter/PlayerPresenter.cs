@@ -4,38 +4,26 @@ using Fighter.View;
 using UniRx;
 
 namespace Fighter.Presenter {
-    public class PlayerPresenter : IPresenter {
-        private readonly Character _model;
-        private readonly ActionHandler _actionHandler;
+    public class PlayerPresenter : Presenter<Character, PlayerView> {
+        public PlayerPresenter(ActionHandler actionHandler, Model.Model model, View.View view)
+            : base(actionHandler, model, view) {
+        }
 
-        public PlayerPresenter(Character model, PlayerView view, ActionHandler actionHandler) {
-            _model = model;
-            _model.Position.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdatePosition(x);
-                }
-            });
-
+        public override void Initialize() {
+            base.Initialize();
             _model.Look.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdateLookAt(x);
+                PlayerView playerView = _view as PlayerView;
+                if (playerView.isActiveAndEnabled) {
+                    playerView.UpdateLookAt(x);
                 }
             });
-
-            _model.Active.Subscribe(x => {
-                if (view.isActiveAndEnabled) {
-                    view.UpdateActive(x);
-                }
-            });
-
-            _actionHandler = actionHandler;
         }
 
-        public void Respawn(Model.Model model) {
-            _model.Initialize(model);
+        public override void Respawn(int id, Model.Model model) {
+            _model.Initialize(id, model);
         }
 
-        public void Update() {
+        public override void Update() {
             Movement();
         }
 

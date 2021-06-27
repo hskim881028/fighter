@@ -8,20 +8,9 @@ using Fighter.View;
 namespace Fighter.Clone {
     public class CloneSpawner : MonoBehaviour {
         public void SpawnPlayer(ActionHandler actionHandler, out Character model) {
-            if (CloneManager.TryGetClone(CloneType.Player, out var clone)) {
-                model = new Character(clone.Key, Vector3.zero, 5.0f, 10);
-                clone.Value.Respawn(model);
-            }
-            else {
-                var prefab = ResourceManager.GetPlayer(0);
-                var player = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                var view = player.GetComponent<PlayerView>();
-                var id = CloneManager.Count;
-                model = new Character(id, Vector3.zero, 5.0f, 10);
-                var presenter = new PlayerPresenter(model, view, actionHandler);
-                var newClone = new Clone(CloneType.Player, model, presenter, view);
-                CloneManager.Add(id, newClone);
-            }
+            model = new Character(CloneManager.Count, Vector3.zero, 5.0f, 10);
+            var prefab = ResourceManager.GetPlayer(0);
+            Spawn<Character, PlayerView, PlayerPresenter>(CloneType.Player, actionHandler, model, prefab);
         }
 
         public void SpawnProjectile(ActionHandler actionHandler,
@@ -29,19 +18,26 @@ namespace Fighter.Clone {
                                     Vector3 direction,
                                     float speed,
                                     float range) {
-            if (CloneManager.TryGetClone(CloneType.Projectile, out var clone)) {
-                var model = new Projectile(clone.Key, startPosition, direction, speed, range);
-                clone.Value.Respawn(model);
+            var model = new Projectile(CloneManager.Count, startPosition, direction, speed, range);
+            var prefab = ResourceManager.GetProjectile(0);
+            Spawn<Projectile, ProjectileView, ProjectilePresenter>(CloneType.Projectile, actionHandler, model, prefab);
+        }
+
+        private static void Spawn<T1, T2, T3>(CloneType cloneType,
+                                              ActionHandler actionHandler,
+                                              Model.Model model,
+                                              GameObject prefab) where T1 : Model.Model
+                                                                 where T2 : View.View
+                                                                 where T3 : Presenter<T1, T2> {
+            if (CloneManager.TryGetClone(cloneType, out var clone)) {
+                clone.Value.Respawn(clone.Key, model);
             }
             else {
-                var prefab = ResourceManager.GetProjectile(0);
-                var projectile = Instantiate(prefab, Vector3.zero, Quaternion.identity);
-                var view = projectile.GetComponent<ProjectileView>();
-                var id = CloneManager.Count;
-                var model = new Projectile(id, startPosition, direction, speed, range);
-                var presenter = new ProjectilePresenter(model, view, actionHandler);
-                var newClone = new Clone(CloneType.Projectile, model, presenter, view);
-                CloneManager.Add(id, newClone);
+                var instantiate = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+                var view = instantiate.GetComponent<T2>();
+                var presenter = PresenterFactory.Create<T1, T2, T3>(actionHandler, model, view);
+                presenter.Initialize();
+                CloneManager.Add(model.ID, new Clone(cloneType, model, presenter, view));
             }
         }
     }

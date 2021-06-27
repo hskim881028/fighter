@@ -17,9 +17,9 @@ namespace Fighter.Clone {
         public bool IsActive { get; private set; }
         public CloneType Type { get; }
 
-        public void Respawn(Model.Model model) {
+        public void Respawn(int id, Model.Model model) {
             _view.gameObject.SetActive(true);
-            _presenter.Respawn(model);
+            _presenter.Respawn(id, model);
             IsActive = true;
         }
 
