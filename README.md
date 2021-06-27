@@ -1,4 +1,4 @@
-# personal project
+# Fighter
  Side project. It is now a barren field. Soon it will be turned into a game. This project was created by using two patterns appropriately.   
  
  
