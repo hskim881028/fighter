@@ -12,9 +12,8 @@ namespace Fighter.Presenter {
         public override void Initialize() {
             base.Initialize();
             _model.Look.Subscribe(x => {
-                PlayerView playerView = _view as PlayerView;
-                if (playerView.isActiveAndEnabled) {
-                    playerView.UpdateLookAt(x);
+                if (_view.isActiveAndEnabled) {
+                    _view.UpdateLookAt(x);
                 }
             });
         }

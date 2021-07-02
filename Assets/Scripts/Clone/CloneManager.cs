@@ -41,8 +41,7 @@ namespace Fighter.Manager {
         }
 
         public static Character SpawnPlayer() {
-            CloneSpawner.SpawnPlayer(_actionHandler, out var model);
-            return model;
+            return CloneSpawner.SpawnPlayer(_actionHandler);
         }
 
         public static void SpawnProjectile(Vector3 startPosition, Vector3 direction, float speed, float range) {

@@ -8,9 +8,10 @@ using Fighter.View;
 
 namespace Fighter.Clone {
     public class CloneSpawner : MonoBehaviour {
-        public static void SpawnPlayer(ActionHandler actionHandler, out Character model) {
-            model = new Character(CloneManager.Count, Vector3.zero, 5.0f, 1.0f, 10);
+        public static Character SpawnPlayer(ActionHandler actionHandler) {
+            var model = new Character(CloneManager.Count, Vector3.zero, 5.0f, 1.0f, 10);
             Spawn<Character, PlayerView, PlayerPresenter>(ResourceType.Player, actionHandler, model, 0);
+            return model;
         }
 
         public static void SpawnProjectile(ActionHandler actionHandler,
