@@ -18,8 +18,8 @@ namespace Fighter.Presenter {
             });
         }
 
-        public override void Respawn(int id, Model.Model model) {
-            _model.Initialize(id, model);
+        public override void Respawn(Model.Model model) {
+            _model.Initialize(model);
         }
 
         public override void Update() {

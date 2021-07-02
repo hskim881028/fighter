@@ -32,7 +32,7 @@ namespace Fighter.Presenter {
             });
         }
 
-        public virtual void Respawn(int id, Model.Model model) {
+        public virtual void Respawn(Model.Model model) {
         }
 
         public virtual void Update() {

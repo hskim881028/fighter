@@ -12,7 +12,7 @@ namespace Fighter {
         private void Awake() {
             ResourceManager.Initialize();
             CloneManager.Initialize(cloneSpawner, _actionHandler);
-            var character = CloneManager.SpawnPlayer();
+            var character = CloneManager.ClonePlayer();
             inputManager.Initialize(_actionHandler, character);
         }
 

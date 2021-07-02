@@ -3,7 +3,7 @@ using UniRx;
 
 namespace Fighter.Model {
     public class Model {
-        public int ID { get; private set; }
+        public int ID { get; set; }
 
         public ReactiveProperty<int> HP { get; } = new ReactiveProperty<int>();
         public ReactiveProperty<bool> Active { get; } = new ReactiveProperty<bool>();
@@ -12,20 +12,18 @@ namespace Fighter.Model {
         public ReactiveProperty<Vector3> Direction { get; } = new ReactiveProperty<Vector3>();
         public ReactiveProperty<Vector3> Look { get; } = new ReactiveProperty<Vector3>();
 
-        protected Model(int id, Vector3 startPosition, float speed, int hp) {
-            ID = id;
+        protected Model(Vector3 startPosition, float speed, int hp) {
             Active.Value = true;
             Position.Value = startPosition;
             Speed.Value = speed;
             HP.Value = hp;
         }
 
-        public void Initialize(int id, Model model) {
-            ID = id;
-            Position.Value = model.Position.Value;
+        public void Initialize(Model model) {
             Active.Value = model.Active.Value;
-            Direction.Value = model.Direction.Value;
+            Position.Value = model.Position.Value;
             Speed.Value = Speed.Value;
+            Direction.Value = model.Direction.Value;
         }
     }
 }
