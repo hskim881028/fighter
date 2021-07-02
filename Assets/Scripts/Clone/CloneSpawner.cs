@@ -9,7 +9,7 @@ using Fighter.View;
 namespace Fighter.Clone {
     public class CloneSpawner : MonoBehaviour {
         public static void SpawnPlayer(ActionHandler actionHandler, out Character model) {
-            model = new Character(CloneManager.Count, Vector3.zero, 5.0f, 10);
+            model = new Character(CloneManager.Count, Vector3.zero, 5.0f, 1.0f, 10);
             Spawn<Character, PlayerView, PlayerPresenter>(ResourceType.Player, actionHandler, model, 0);
         }
 

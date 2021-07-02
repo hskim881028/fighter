@@ -19,7 +19,7 @@ namespace Fighter.Model {
             Speed.Value = speed;
             HP.Value = hp;
         }
-        
+
         public void Initialize(int id, Model model) {
             ID = id;
             Position.Value = model.Position.Value;

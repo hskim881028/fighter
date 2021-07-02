@@ -22,5 +22,9 @@ namespace Fighter.Manager {
         private void OnAttack() {
             _actionHandler.Enqueue(new AttackAction(_character));
         }
+
+        private void OnAvoid() {
+            _actionHandler.Enqueue(new AvoidAction(_character));
+        }
     }
 }
