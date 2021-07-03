@@ -19,5 +19,5 @@ MonoBehaviour:
     Look: {x: 0, y: 0, z: 0}
     Speed: 0
     Damage: 0
-    Hp: 0
+    Hp: 100
     Avoid: 0

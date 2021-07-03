@@ -16,8 +16,8 @@ MonoBehaviour:
   Data:
   - Position: {x: 0, y: 0, z: 0}
     Direction: {x: 0, y: 0, z: 0}
-    Look: {x: 0, y: 0, z: 0}
+    Look: {x: 1, y: 0, z: 0}
     Speed: 3
-    Damage: 0
-    Hp: 0
+    Damage: 1
+    Hp: 100
     Avoid: 1

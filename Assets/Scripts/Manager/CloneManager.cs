@@ -29,6 +29,13 @@ namespace Fighter.Manager {
             }
         }
 
+        public static (Model.Model, Model.Model) GetModels((int, int) ids) {
+            var (attackerId, defenderId) = ids;
+            var attacker = _clones[attackerId].Model;
+            var defender = _clones[defenderId].Model;
+            return (attacker, defender);
+        }
+
         public static Character ClonePlayer(Vector3 position, Vector3 direction) {
             var model = Spawn<Character, PlayerView, PlayerPresenter>(CloneType.Player, _actionHandler, position,
                                                                       direction, 0);

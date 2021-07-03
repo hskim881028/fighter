@@ -4,14 +4,14 @@ using UnityEngine;
 
 namespace Fighter.Clone {
     public class Clone {
-        private readonly Model.Model _model;
         private readonly View.View _view;
         private readonly IPresenter _presenter;
+        public Model.Model Model { get; }
 
         public Clone(CloneType type, Model.Model model, IPresenter presenter, View.View view) {
             IsActive = true;
             Type = type;
-            _model = model;
+            Model = model;
             _presenter = presenter;
             _view = view;
         }

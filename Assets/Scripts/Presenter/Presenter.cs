@@ -9,7 +9,7 @@ namespace Fighter.Presenter {
         protected readonly T1 _model;
         protected readonly T2 _view;
 
-        public Presenter(ActionHandler actionHandler, Model.Model model, View.View view) {
+        protected Presenter(ActionHandler actionHandler, Model.Model model, View.View view) {
             _actionHandler = actionHandler;
             _model = (T1) model;
             _view = (T2) view;

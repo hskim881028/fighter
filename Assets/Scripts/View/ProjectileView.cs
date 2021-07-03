@@ -6,8 +6,7 @@ namespace Fighter.View {
         public Subject<(int attacker , int defender)> TriggerEnter { get; } = new Subject<(int, int)>();
         
         private void OnTriggerEnter2D(Collider2D other) {
-            TriggerEnter.OnNext((transform.GetInstanceID(), other.GetInstanceID()));
-            // var model = CloneManager.GetModel(id);
+            TriggerEnter.OnNext((gameObject.GetInstanceID(), other.gameObject.GetInstanceID()));
         }
     }
 }

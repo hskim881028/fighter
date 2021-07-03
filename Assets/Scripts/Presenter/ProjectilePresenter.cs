@@ -1,5 +1,6 @@
 ﻿using Fighter.Action;
 using Fighter.Data;
+using Fighter.Manager;
 using Fighter.Model;
 using Fighter.View;
 using UniRx;
@@ -17,7 +18,8 @@ namespace Fighter.Presenter {
             base.Initialize();
             _view.TriggerEnter.Subscribe(x => {
                 var (attacker, defender) = x;
-                Debug.Log($"attacker : {attacker} ------ defender : {defender}");
+                var models = CloneManager.GetModels(x);
+                _actionHandler.Enqueue(new HitAction(models));
                 _actionHandler.Enqueue(new DestroyAction(_model));
             });
             startPosition = _model.Position.Value;

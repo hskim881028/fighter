@@ -5,7 +5,8 @@ namespace Fighter.Action {
         private readonly Model.Model _attacker;
         private readonly Model.Model _defender;
 
-        public HitAction(Model.Model attacker, Model.Model defender) {
+        public HitAction((Model.Model, Model.Model) models) {
+            var (attacker, defender) = models;
             _attacker = attacker;
             _defender = defender;
         }
