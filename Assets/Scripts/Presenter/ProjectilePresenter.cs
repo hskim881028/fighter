@@ -7,7 +7,6 @@ using UnityEngine;
 
 namespace Fighter.Presenter {
     public class ProjectilePresenter : Presenter<Projectile, ProjectileView> {
-        private Projectile _projectile;
         private Vector3 startPosition;
 
         public ProjectilePresenter(ActionHandler actionHandler, Model.Model model, View.View view)
@@ -19,17 +18,14 @@ namespace Fighter.Presenter {
             _view.TriggerEnter.Subscribe(x => {
                 var (attacker, defender) = x;
                 Debug.Log($"attacker : {attacker} ------ defender : {defender}");
-                _actionHandler.Enqueue(new DestroyAction(_projectile));
+                _actionHandler.Enqueue(new DestroyAction(_model));
             });
-            _projectile = _model;
-            startPosition = _projectile.Position.Value;
+            startPosition = _model.Position.Value;
         }
 
         public override void Respawn(IData data, Vector3 position, Vector3 direction) {
-            if (data is ProjectileData projectileData) {
-                startPosition = projectileData.Position;    
-            }
-            _projectile.Initialize(_model.ID, data, position, direction);
+            base.Respawn(data, position, direction);
+            startPosition = position;
         }
 
         public override void Update() {
@@ -38,12 +34,13 @@ namespace Fighter.Presenter {
         }
 
         private void Movement() {
-            _actionHandler.Enqueue(new MoveAction(_projectile));
+            _actionHandler.Enqueue(new MoveAction(_model));
         }
 
         private void Destroy() {
-            if (Vector3.Distance(startPosition, _projectile.Position.Value) > _projectile.Range) {
-                _actionHandler.Enqueue(new DestroyAction(_projectile));
+            var dist = Vector3.SqrMagnitude(startPosition - _model.Position.Value);
+            if (dist > _model.Range * _model.Range) {
+                _actionHandler.Enqueue(new DestroyAction(_model));
             }
         }
     }

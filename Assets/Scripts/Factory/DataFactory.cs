@@ -10,12 +10,13 @@ namespace Fighter.Factory {
             switch (data.CloneType) {
                 case CloneType.Player:
                     var player = data as CharacterDataScriptableObject;
-                    var pl = player.Data.Cast<IData>().ToList();
-                    return pl;
+                    return player.Data.Cast<IData>().ToList();;
+                case CloneType.Enemy:
+                    var enemy = data as CharacterDataScriptableObject;
+                    return enemy.Data.Cast<IData>().ToList();;
                 case CloneType.Projectile:
                     var projectile = data as ProjectileDataScriptableObject;
-                    var test = projectile.Data.Cast<IData>().ToList();
-                    return test;
+                    return projectile.Data.Cast<IData>().ToList();;
             }
             return null;
         }

@@ -35,6 +35,11 @@ namespace Fighter.Manager {
             return model as Character;
         }
 
+        public static void CloneEnemy(Vector3 position, Vector3 direction) {
+            var model = Spawn<Character, EnemyView, EnemyPresenter>(CloneType.Enemy, _actionHandler, position,
+                                                                    direction, 0);
+        }
+
         public static void CloneProjectile(Vector3 position, Vector3 direction) {
             Spawn<Projectile, ProjectileView, ProjectilePresenter>(CloneType.Projectile, _actionHandler, position,
                                                                    direction, 0);

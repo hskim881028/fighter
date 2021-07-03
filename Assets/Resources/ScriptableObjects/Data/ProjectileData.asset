@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81da2c07e3e449bcae1916b4b764a360, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  CloneType: 1
+  CloneType: 2
   Data:
   - Position: {x: 0, y: 0, z: 0}
     Direction: {x: 0, y: 0, z: 0}
@@ -20,4 +20,4 @@ MonoBehaviour:
     Speed: 3
     Damage: 0
     Hp: 0
-    Range: 4
+    Range: 2

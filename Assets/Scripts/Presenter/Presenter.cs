@@ -38,6 +38,7 @@ namespace Fighter.Presenter {
         }
 
         public virtual void Respawn(IData data, Vector3 position, Vector3 direction) {
+            _model.Initialize(_model.ID, data, position, direction);
         }
 
         public virtual void Update() {
