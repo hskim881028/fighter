@@ -18,6 +18,6 @@ MonoBehaviour:
     Direction: {x: 0, y: 0, z: 0}
     Look: {x: 0, y: 0, z: 0}
     Speed: 3
-    Damage: 2
+    Damage: 10
     Hp: 0
     Range: 2
