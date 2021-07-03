@@ -1,14 +1,15 @@
-﻿using UniRx;
+﻿using Fighter.Data;
 using UnityEngine;
 
 namespace Fighter.Model {
     public class Character : Model {
-        public ReactiveProperty<float> Avoid { get; } = new ReactiveProperty<float>();
+        public float Avoid { get; private set; }
 
-        public Character(Vector3 startPosition, float speed, float avoid, int hp)
-            : base(startPosition, speed, hp) {
-            Look.Value = Vector3.right;
-            Avoid.Value = avoid;
+        public override void Initialize(int id, IData data, Vector3 position, Vector3 direction) {
+            base.Initialize(id, data, position, direction);
+            if (data is CharacterData characterData) {
+                Avoid = characterData.Avoid;
+            }
         }
     }
 }

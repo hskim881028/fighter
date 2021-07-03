@@ -1,6 +1,7 @@
 ﻿using Fighter.Action;
+using Fighter.Presenter;
 
-namespace Fighter.Presenter {
+namespace Fighter.Factory {
     public static class PresenterFactory {
         public static Presenter<T1, T2> Create<T1, T2, T3>(ActionHandler actionHandler,
                                                            Model.Model model,

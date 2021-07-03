@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using Fighter.Clone;
 using UnityEngine;
 
 namespace Fighter.ScriptableObject {
-    [CreateAssetMenu(fileName = "Prefabs", menuName = "ScriptableObject/Player Prefabs", order = 1)]
+    [CreateAssetMenu(fileName = "Prefab", menuName = "ScriptableObject/Prefab", order = 1)]
     public class PrefabScriptableObject : UnityEngine.ScriptableObject {
-        public List<GameObject> data;
+        public CloneType cloneType;
+        public List<GameObject> Data;
     }
 }

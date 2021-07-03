@@ -1,5 +1,6 @@
-﻿using Fighter.Presenter;
-using Fighter.Type;
+﻿using Fighter.Data;
+using Fighter.Presenter;
+using UnityEngine;
 
 namespace Fighter.Clone {
     public class Clone {
@@ -7,7 +8,7 @@ namespace Fighter.Clone {
         private readonly View.View _view;
         private readonly IPresenter _presenter;
 
-        public Clone(ResourceType type, Model.Model model, IPresenter presenter, View.View view) {
+        public Clone(CloneType type, Model.Model model, IPresenter presenter, View.View view) {
             IsActive = true;
             Type = type;
             _model = model;
@@ -16,11 +17,11 @@ namespace Fighter.Clone {
         }
 
         public bool IsActive { get; private set; }
-        public ResourceType Type { get; }
+        public CloneType Type { get; }
 
-        public void Respawn(Model.Model model) {
+        public void Respawn(IData data, Vector3 position, Vector3 direction) {
             _view.gameObject.SetActive(true);
-            _presenter.Respawn(model);
+            _presenter.Respawn(data, position, direction);
             IsActive = true;
         }
 

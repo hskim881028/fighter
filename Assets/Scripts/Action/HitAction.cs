@@ -2,16 +2,19 @@
 
 namespace Fighter.Action {
     public class HitAction : IAction {
-        private readonly Model.Model _model;
+        private readonly Model.Model _attacker;
+        private readonly Model.Model _defender;
 
-        public HitAction(Model.Model model) {
-            _model = model;
+        public HitAction(Model.Model attacker, Model.Model defender) {
+            _attacker = attacker;
+            _defender = defender;
         }
 
         public void Execute() {
-            if (_model.HP.Value <= 0) {
-                _model.Active.Value = false;
-                CloneManager.Destroy(_model.ID);
+            _defender.HP.Value -= _attacker.Damage.Value;
+            if (_defender.HP.Value <= 0) {
+                _defender.Active.Value = false;
+                CloneManager.Destroy(_defender.ID);
             }
         }
     }

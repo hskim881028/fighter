@@ -1,4 +1,5 @@
 ﻿using Fighter.Action;
+using Fighter.Data;
 using UnityEngine;
 using UniRx;
 
@@ -30,9 +31,13 @@ namespace Fighter.Presenter {
                     _view.UpdateActive(x);
                 }
             });
+
+            // _model.HP.Subscribe(x => {
+            //
+            // });
         }
 
-        public virtual void Respawn(Model.Model model) {
+        public virtual void Respawn(IData data, Vector3 position, Vector3 direction) {
         }
 
         public virtual void Update() {

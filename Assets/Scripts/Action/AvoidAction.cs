@@ -9,7 +9,7 @@ namespace Fighter.Action {
         }
 
         public void Execute() {
-            _model.Position.Value += _model.Look.Value * _model.Avoid.Value;
+            _model.Position.Value += _model.Look.Value * _model.Avoid;
         }
     }
 }

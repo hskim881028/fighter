@@ -9,7 +9,7 @@ namespace Fighter.Action {
         }
 
         public void Execute() {
-            CloneManager.CloneProjectile(_model.Position.Value, _model.Look.Value, 5.0f, 2);
+            CloneManager.CloneProjectile(_model.Position.Value, _model.Look.Value);
         }
     }
 }

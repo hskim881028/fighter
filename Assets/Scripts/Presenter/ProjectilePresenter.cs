@@ -1,4 +1,5 @@
 ﻿using Fighter.Action;
+using Fighter.Data;
 using Fighter.Model;
 using Fighter.View;
 using UniRx;
@@ -15,18 +16,20 @@ namespace Fighter.Presenter {
 
         public override void Initialize() {
             base.Initialize();
-            _view.TriggerEnter.Subscribe( x=> {
+            _view.TriggerEnter.Subscribe(x => {
                 var (attacker, defender) = x;
                 Debug.Log($"attacker : {attacker} ------ defender : {defender}");
                 _actionHandler.Enqueue(new DestroyAction(_projectile));
             });
-            _projectile = _model as Projectile;
+            _projectile = _model;
             startPosition = _projectile.Position.Value;
         }
 
-        public override void Respawn(Model.Model model) {
-            startPosition = model.Position.Value;
-            _projectile.Initialize(model);
+        public override void Respawn(IData data, Vector3 position, Vector3 direction) {
+            if (data is ProjectileData projectileData) {
+                startPosition = projectileData.Position;    
+            }
+            _projectile.Initialize(_model.ID, data, position, direction);
         }
 
         public override void Update() {

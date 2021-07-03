@@ -1,7 +1,9 @@
 ﻿using Fighter.Action;
+using Fighter.Data;
 using Fighter.Model;
 using Fighter.View;
 using UniRx;
+using UnityEngine;
 
 namespace Fighter.Presenter {
     public class PlayerPresenter : Presenter<Character, PlayerView> {
@@ -18,8 +20,8 @@ namespace Fighter.Presenter {
             });
         }
 
-        public override void Respawn(Model.Model model) {
-            _model.Initialize(model);
+        public override void Respawn(IData data, Vector3 position, Vector3 direction) {
+            _model.Initialize(_model.ID, data, position, direction);
         }
 
         public override void Update() {

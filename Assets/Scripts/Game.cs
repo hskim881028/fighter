@@ -1,18 +1,16 @@
-﻿using Fighter.Clone;
-using Fighter.Action;
+﻿using Fighter.Action;
 using Fighter.Manager;
 using UnityEngine;
 
 namespace Fighter {
     public class Game : MonoBehaviour {
         [SerializeField] private InputManager inputManager;
-        [SerializeField] private CloneSpawner cloneSpawner;
         private readonly ActionHandler _actionHandler = new ActionHandler();
 
         private void Awake() {
-            ResourceManager.Initialize();
-            CloneManager.Initialize(cloneSpawner, _actionHandler);
-            var character = CloneManager.ClonePlayer();
+            GameManager.Initialize();
+            CloneManager.Initialize(_actionHandler);
+            var character = CloneManager.ClonePlayer(Vector3.zero, Vector3.zero);
             inputManager.Initialize(_actionHandler, character);
         }
 

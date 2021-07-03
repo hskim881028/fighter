@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+﻿using Fighter.Data;
+using UnityEngine;
 
 namespace Fighter.Model {
     public class Projectile : Model {
-        public float Range { get; }
-        private new const int HP = 999;
-
-        public Projectile(Vector3 startPosition, Vector3 direction, float speed, float range)
-            : base(startPosition, speed, HP) {
-            Direction.Value = direction;
-            Range = range;
+        public float Range { get; private set; }
+        public override void Initialize(int id, IData data, Vector3 position, Vector3 direction) {
+            base.Initialize(id, data, position, direction);
+            if (data is ProjectileData projectileData) {
+                Range = projectileData.Range;
+            }
         }
     }
 }
