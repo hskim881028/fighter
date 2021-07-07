@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2853074920b140dbb9c34f69723c6bb2, type: 3}
-  m_Name: Projectile
+  m_Script: {fileID: 11500000, guid: 9dc3c9f19d374c0081a918d09faa0fb7, type: 3}
+  m_Name: Damage
   m_EditorClassIdentifier: 
-  CloneType: 2
+  UIType: 0
   Data:
-  - {fileID: 8490657334456280852, guid: b999cd0364204ef4385d6d38f615cc16, type: 3}
+  - {fileID: 6396366726019958305, guid: 32f6155bafad48b47ac0d086fd9865d3, type: 3}

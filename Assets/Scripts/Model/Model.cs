@@ -26,7 +26,6 @@ namespace Fighter.Model {
 
             Position.Value = position;
             Direction.Value = direction;
-            Active.Value = true;
         }
     }
 }

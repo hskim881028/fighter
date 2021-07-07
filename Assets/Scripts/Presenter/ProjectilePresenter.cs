@@ -14,8 +14,8 @@ namespace Fighter.Presenter {
             : base(actionHandler, model, view) {
         }
 
-        public override void Initialize() {
-            base.Initialize();
+        public override void Initialize(int id, IData data, Vector3 position, Vector3 direction) {
+            base.Initialize(id, data, position, direction);
             _view.TriggerEnter.Subscribe(x => {
                 var (attacker, defender) = x;
                 var models = CloneManager.GetModels(x);

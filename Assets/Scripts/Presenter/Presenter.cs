@@ -15,26 +15,15 @@ namespace Fighter.Presenter {
             _view = (T2) view;
         }
 
-        protected Presenter() {
-            Debug.Log("Call default");
-        }
-
-        public virtual void Initialize() {
+        public virtual void Initialize(int id, IData data, Vector3 position, Vector3 direction) {
+            _model.Initialize(id, data, position, direction);
             _model.Position.Subscribe(x => {
-                if (_view.isActiveAndEnabled) {
-                    _view.UpdatePosition(x);
-                }
+                _view.UpdatePosition(x);
             });
 
             _model.Active.Subscribe(x => {
-                if (_view.isActiveAndEnabled) {
-                    _view.UpdateActive(x);
-                }
+                _view.UpdateActive(x);
             });
-
-            // _model.HP.Subscribe(x => {
-            //
-            // });
         }
 
         public virtual void Respawn(IData data, Vector3 position, Vector3 direction) {
@@ -42,6 +31,10 @@ namespace Fighter.Presenter {
         }
 
         public virtual void Update() {
+        }
+
+        public Model.Model GetModel() {
+            return _model;
         }
     }
 }

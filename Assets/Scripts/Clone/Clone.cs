@@ -1,39 +1,38 @@
 ﻿using Fighter.Data;
 using Fighter.Presenter;
+using UniRx;
 using UnityEngine;
 
 namespace Fighter.Clone {
     public class Clone {
-        private readonly View.View _view;
+        public CloneType Type { get; }
         private readonly IPresenter _presenter;
-        public Model.Model Model { get; }
+        public Model.Model Model => _presenter.GetModel();
+        
+        public ReactiveProperty<bool> IsActive { get; } = new ReactiveProperty<bool>();
 
-        public Clone(CloneType type, Model.Model model, IPresenter presenter, View.View view) {
-            IsActive = true;
+        public Clone(CloneType type, IPresenter presenter) {
+            IsActive.Value = true;
             Type = type;
-            Model = model;
             _presenter = presenter;
-            _view = view;
+            IsActive.Subscribe(x => {
+                Model.Active.Value = x;
+            });
         }
 
-        public bool IsActive { get; private set; }
-        public CloneType Type { get; }
-
         public void Respawn(IData data, Vector3 position, Vector3 direction) {
-            _view.gameObject.SetActive(true);
             _presenter.Respawn(data, position, direction);
-            IsActive = true;
+            IsActive.Value = true;
         }
 
         public void Update() {
-            if (IsActive) {
+            if (IsActive.Value) {
                 _presenter.Update();
             }
         }
 
         public void Destroy() {
-            IsActive = false;
-            _view.gameObject.SetActive(false);
+            IsActive.Value = false;
         }
     }
 }

@@ -9,9 +9,10 @@ namespace Fighter {
 
         private void Awake() {
             GameManager.Initialize();
+            UIManager.Initialize();
             CloneManager.Initialize(_actionHandler);
-            var player = CloneManager.ClonePlayer(Vector3.zero, Vector3.zero);
-            inputManager.Initialize(_actionHandler, player);
+            CloneManager.ClonePlayer(Vector3.zero, Vector3.zero);
+            inputManager.Initialize(_actionHandler, CloneManager.GetPlayerModel());
             for (int i = 0; i < 5; i++) {
                 CloneManager.CloneEnemy(new Vector3(i + 1, 0, 0), Vector3.zero);
             }
