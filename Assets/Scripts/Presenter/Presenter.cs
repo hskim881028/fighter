@@ -8,7 +8,9 @@ namespace Fighter.Presenter {
         protected readonly ActionHandler _actionHandler;
         protected readonly T1 _model;
         protected readonly T2 _view;
-
+        
+        public Model.Model Model => _model;
+        
         protected Presenter(ActionHandler actionHandler, Model.Model model, View.View view) {
             _actionHandler = actionHandler;
             _model = (T1) model;
@@ -25,15 +27,17 @@ namespace Fighter.Presenter {
                 _view.UpdateActive(x);
             });
         }
-
+        
         public virtual void Respawn(IData data, Vector3 position, Vector3 direction) {
             _model.Initialize(_model.ID, data, position, direction);
         }
-
-        public abstract void Update();
-
-        public Model.Model GetModel() {
-            return _model;
+        
+        public void Update() {
+            UpdateState();
+            ExecuteAction();
         }
+
+        protected abstract void UpdateState();
+        protected abstract void ExecuteAction();
     }
 }

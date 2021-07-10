@@ -5,7 +5,7 @@ namespace Fighter.View {
         [SerializeField] private Transform eye;
         private const float interval = 0.2f;
 
-        protected override void Initialize() {
+        protected override void OnAwake() {
             if (Camera.main is { })
                 Camera.main.transform.SetParent(transform);
         }

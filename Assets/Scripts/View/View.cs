@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Fighter.View {
     public abstract class View : MonoBehaviour, IView {
+        protected abstract void OnAwake();
+        
         private void Awake() {
-            Initialize();
+            OnAwake();
         }
-
-        protected abstract void Initialize();
 
         public void UpdatePosition(Vector3 position) {
             transform.position = position;

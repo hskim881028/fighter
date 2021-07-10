@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Fighter.Clone;
+using Fighter.Enum;
 using UnityEngine;
 
 namespace Fighter.ScriptableObject {

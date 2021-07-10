@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Fighter.Action;
-using Fighter.Clone;
+using Fighter.Enum;
 using Fighter.Factory;
 using Fighter.Model;
 using Fighter.Presenter;
@@ -62,6 +63,10 @@ namespace Fighter.Manager {
                                               int cloneId = 0) where T1 : Model.Model, new()
                                                                where T2 : View.View
                                                                where T3 : Presenter<T1, T2> {
+            if (!System.Enum.IsDefined(typeof(CloneType), type))
+                throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(CloneType));
+            if (!System.Enum.IsDefined(typeof(CloneType), type))
+                throw new InvalidEnumArgumentException(nameof(type), (int) type, typeof(CloneType));
             var data = GameManager.GetData(type, cloneId);
             if (TryGetClone(type, out var clone)) {
                 clone.Respawn(data, position, direction);
@@ -73,8 +78,7 @@ namespace Fighter.Manager {
                 var instanceID = instantiate.GetInstanceID();
                 var view = instantiate.GetComponent<T2>();
                 var presenter = PresenterFactory.Create<T1, T2, T3>(actionHandler, model, view);
-                presenter.Initialize(instanceID, data, position, direction);
-                _clones.Add(instanceID, new Clone.Clone(type, presenter));
+                _clones.Add(instanceID, new Clone.Clone(type, presenter, instanceID, data, position, direction));
             }
         }
 

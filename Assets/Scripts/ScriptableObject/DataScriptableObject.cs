@@ -1,4 +1,4 @@
-﻿using Fighter.Clone;
+﻿using Fighter.Enum;
 
 namespace Fighter.ScriptableObject {
     public class DataScriptableObject : UnityEngine.ScriptableObject {

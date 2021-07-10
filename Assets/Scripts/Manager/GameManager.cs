@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using Fighter.ScriptableObject;
 using UnityEngine;
 using System.Linq;
-using Fighter.Clone;
 using Fighter.Data;
+using Fighter.Enum;
 using Fighter.Factory;
 using Fighter.UI;
 

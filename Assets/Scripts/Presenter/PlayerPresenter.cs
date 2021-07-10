@@ -24,8 +24,11 @@ namespace Fighter.Presenter {
             //
             // });
         }
-
-        public override void Update() {
+        
+        protected override void UpdateState() {
+        }
+        
+        protected override void ExecuteAction() {
             Movement();
         }
 
