@@ -1,4 +1,8 @@
-﻿using Fighter.Manager;
+﻿using Fighter.Enum;
+using Fighter.Manager;
+using Fighter.Model;
+using Fighter.Presenter;
+using Fighter.View;
 
 namespace Fighter.Action {
     public class AttackAction : IAction {
@@ -9,7 +13,8 @@ namespace Fighter.Action {
         }
 
         public void Execute() {
-            CloneManager.CloneProjectile(_model.Position.Value, _model.Look.Value);
+            CloneManager.Clone<Projectile, ProjectileView, ProjectilePresenter>(
+                CloneType.Projectile, _model.Position.Value, _model.Look.Value);
         }
     }
 }
