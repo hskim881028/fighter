@@ -3,6 +3,5 @@
         Player,
         Enemy,
         Projectile,
-        UI,
     }
 }

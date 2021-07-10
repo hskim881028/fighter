@@ -6,7 +6,6 @@ namespace Fighter.View {
         private const float interval = 0.2f;
 
         protected override void Initialize() {
-            base.Initialize();
             if (Camera.main is { })
                 Camera.main.transform.SetParent(transform);
         }

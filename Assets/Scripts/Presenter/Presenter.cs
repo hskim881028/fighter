@@ -4,7 +4,7 @@ using UnityEngine;
 using UniRx;
 
 namespace Fighter.Presenter {
-    public class Presenter<T1, T2> : IPresenter where T1 : Model.Model where T2 : View.View {
+    public abstract class Presenter<T1, T2> : IPresenter where T1 : Model.Model where T2 : View.View {
         protected readonly ActionHandler _actionHandler;
         protected readonly T1 _model;
         protected readonly T2 _view;
@@ -30,8 +30,7 @@ namespace Fighter.Presenter {
             _model.Initialize(_model.ID, data, position, direction);
         }
 
-        public virtual void Update() {
-        }
+        public abstract void Update();
 
         public Model.Model GetModel() {
             return _model;
