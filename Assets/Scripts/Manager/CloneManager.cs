@@ -48,7 +48,7 @@ namespace Fighter.Manager {
         }
 
         public static void CloneEnemy(Vector3 position, Vector3 direction) {
-            Spawn<Character, EnemyView, EnemyPresenter>(CloneType.Enemy, _actionHandler, position, direction, 0);
+            Spawn<Enemy, EnemyView, EnemyPresenter>(CloneType.Enemy, _actionHandler, position, direction, 0);
         }
 
         public static void CloneProjectile(Vector3 position, Vector3 direction) {
@@ -75,10 +75,10 @@ namespace Fighter.Manager {
                 var model = new T1();
                 var prefab = GameManager.GetClone(type, cloneId);
                 var instantiate = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity, _pool);
-                var instanceID = instantiate.GetInstanceID();
+                var instanceId = instantiate.GetInstanceID();
                 var view = instantiate.GetComponent<T2>();
                 var presenter = PresenterFactory.Create<T1, T2, T3>(actionHandler, model, view);
-                _clones.Add(instanceID, new Clone.Clone(type, presenter, instanceID, data, position, direction));
+                _clones.Add(instanceId, new Clone.Clone(type, presenter, instanceId, data, position, direction));
             }
         }
 

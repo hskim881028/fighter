@@ -1,6 +1,7 @@
 ﻿namespace Fighter.Enum {
-    public enum ProjectileState {
+    public enum EnemyState {
         Idle,
+        Search,
         Move,
         Attack,
         Destroy,

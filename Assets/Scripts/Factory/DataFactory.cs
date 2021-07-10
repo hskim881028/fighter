@@ -13,7 +13,7 @@ namespace Fighter.Factory {
                     var player = data as CharacterDataScriptableObject;
                     return player.Data.Cast<IData>().ToList();
                 case CloneType.Enemy:
-                    var enemy = data as CharacterDataScriptableObject;
+                    var enemy = data as EnemyDataScriptableObject;
                     return enemy.Data.Cast<IData>().ToList();
                 case CloneType.Projectile:
                     var projectile = data as ProjectileDataScriptableObject;

@@ -1,5 +1,4 @@
-﻿using System;
-using Fighter.Action;
+﻿using Fighter.Action;
 using Fighter.Data;
 using Fighter.Enum;
 using Fighter.Manager;
@@ -25,6 +24,7 @@ namespace Fighter.Presenter {
                 var models = CloneManager.GetModels(x);
                 _actionHandler.Enqueue(new HitAction(models));
                 _actionHandler.Enqueue(new DestroyAction(_model));
+                _state = ProjectileState.Attack;
             });
             startPosition = _model.Position.Value;
         }
@@ -35,7 +35,7 @@ namespace Fighter.Presenter {
         }
 
         protected override void UpdateState() {
-            CheckLife();
+            Displacement();
         }
         
         protected override void ExecuteAction() {
@@ -46,16 +46,12 @@ namespace Fighter.Presenter {
                 case ProjectileState.Destroy:
                     _actionHandler.Enqueue(new DestroyAction(_model));
                     break;
-                case ProjectileState.Attack:
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
             }
         }
 
-        private void CheckLife() {
-            var dist = Vector3.SqrMagnitude(startPosition - _model.Position.Value);
-            _state = dist < _model.Range * _model.Range ? ProjectileState.Move : ProjectileState.Destroy;
+        private void Displacement() {
+            var distance = Vector3.SqrMagnitude(startPosition - _model.Position.Value);
+            _state = distance < _model.Range * _model.Range ? ProjectileState.Move : ProjectileState.Destroy;
         }
     }
 }

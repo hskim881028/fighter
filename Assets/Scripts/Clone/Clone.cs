@@ -12,11 +12,11 @@ namespace Fighter.Clone {
         
         public ReactiveProperty<bool> IsActive { get; } = new ReactiveProperty<bool>();
 
-        public Clone(CloneType type, IPresenter presenter, int instanceID, IData data, Vector3 position, Vector3 direction) {
+        public Clone(CloneType type, IPresenter presenter, int instanceId, IData data, Vector3 position, Vector3 direction) {
             IsActive.Value = true;
             Type = type;
             _presenter = presenter;
-            _presenter.Initialize(instanceID, data, position, direction);
+            _presenter.Initialize(instanceId, data, position, direction);
             IsActive.Subscribe(x => {
                 Model.Active.Value = x;
             });

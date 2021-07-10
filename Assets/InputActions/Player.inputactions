@@ -6,7 +6,7 @@
             "id": "2e7c61e7-f4f0-41ec-af26-e825fd36a516",
             "actions": [
                 {
-                    "name": "Movement",
+                    "name": "Lookat",
                     "type": "Value",
                     "id": "aa38520c-5685-4e07-9a8a-20621921dc98",
                     "expectedControlType": "Vector2",
@@ -38,7 +38,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -49,7 +49,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -60,7 +60,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -71,7 +71,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -82,7 +82,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -93,7 +93,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -104,7 +104,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -115,7 +115,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -126,7 +126,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -137,7 +137,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -148,7 +148,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Movement",
+                    "action": "Lookat",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

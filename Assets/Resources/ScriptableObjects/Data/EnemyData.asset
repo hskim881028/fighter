@@ -9,15 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 951a4f2dd476463ea8e1c0574d444d84, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d143e008d654706b1804f332306af63, type: 3}
   m_Name: EnemyData
   m_EditorClassIdentifier: 
   CloneType: 1
   Data:
-  - Position: {x: 0, y: 0, z: 0}
-    Direction: {x: 0, y: 0, z: 0}
-    Look: {x: 0, y: 0, z: 0}
-    Speed: 0
+  - Look: {x: 0, y: 0, z: 0}
+    Speed: 0.5
     Damage: 0
     Hp: 100
     Avoid: 0
+    SearchRange: 2

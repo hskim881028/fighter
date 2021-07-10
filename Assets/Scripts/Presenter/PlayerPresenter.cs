@@ -1,5 +1,6 @@
 ﻿using Fighter.Action;
 using Fighter.Data;
+using Fighter.Enum;
 using Fighter.Model;
 using Fighter.View;
 using UniRx;
@@ -7,6 +8,8 @@ using UnityEngine;
 
 namespace Fighter.Presenter {
     public class PlayerPresenter : Presenter<Character, PlayerView> {
+        private PlayerState _state = PlayerState.Idle;
+
         public PlayerPresenter(ActionHandler actionHandler, Model.Model model, View.View view)
             : base(actionHandler, model, view) {
         }
@@ -18,25 +21,40 @@ namespace Fighter.Presenter {
                     _view.UpdateLookAt(x);
                 }
             });
-            
-            //todo UI 만들고 처리
-            // _model.HP.Subscribe(x => {
-            //
-            // });
-        }
-        
-        protected override void UpdateState() {
-        }
-        
-        protected override void ExecuteAction() {
-            Movement();
+
+            Game.Instance.InputManager.Initialize(Lookat, Attack, Avoid);
         }
 
-        private void Movement() {
-            var direction = _model.Direction.Value;
-            if (direction.sqrMagnitude > 0) {
-                _actionHandler.Enqueue(new MoveAction(_model));
+        protected override void UpdateState() {
+            UpdateDisplacement();
+        }
+
+        protected override void ExecuteAction() {
+            switch (_state) {
+                case PlayerState.Move:
+                    _actionHandler.Enqueue(new MoveAction(_model));
+                    break;
             }
+        }
+
+        private void UpdateDisplacement() {
+            var direction = _model.Direction.Value;
+            _state = direction.sqrMagnitude > 0 ? PlayerState.Move : PlayerState.Idle;
+        }
+
+        private void Attack() {
+            _state = PlayerState.Attack;
+            _actionHandler.Enqueue(new AttackAction(_model));
+        }
+
+        private void Lookat(Vector3 direction) {
+            _state = PlayerState.Lookat;
+            _actionHandler.Enqueue(new LookAtAction(_model, direction));
+        }
+
+        private void Avoid() {
+            _state = PlayerState.Avoid;
+            _actionHandler.Enqueue(new AvoidAction(_model));
         }
     }
 }

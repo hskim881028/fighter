@@ -5,26 +5,28 @@ using UnityEngine.InputSystem;
 
 namespace Fighter.Manager {
     public class InputManager : MonoBehaviour {
-        private ActionHandler _actionHandler;
-        private Character _character;
+        private System.Action<Vector3> _lookat;
+        private System.Action _attack;
+        private System.Action _avoid;
 
-        public void Initialize(ActionHandler actionHandler, Character character) {
-            _actionHandler = actionHandler;
-            _character = character;
+        public void Initialize(System.Action<Vector3> lookat, System.Action attack, System.Action avoid) {
+            _attack = attack;
+            _lookat = lookat;
+            _avoid = avoid;
         }
 
-        private void OnMovement(InputValue value) {
+        private void OnLookat(InputValue value) {
             var inputMovement = value.Get<Vector2>();
             var direction = new Vector3(inputMovement.x, inputMovement.y, 0);
-            _actionHandler.Enqueue(new LookAtAction(_character, direction));
+            _lookat?.Invoke(direction);
         }
 
         private void OnAttack() {
-            _actionHandler.Enqueue(new AttackAction(_character));
+            _attack?.Invoke();
         }
 
         private void OnAvoid() {
-            _actionHandler.Enqueue(new AvoidAction(_character));
+            _avoid?.Invoke();
         }
     }
 }
