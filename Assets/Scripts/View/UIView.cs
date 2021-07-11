@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using Fighter.UI.ValueObject;
+using UnityEngine;
 
 namespace Fighter.View {
     public class UIView : MonoBehaviour, IView {
         private System.Action _destroy;
 
-        public virtual void Initialize(System.Action destroy, Vector3 position) {
+        public virtual void Initialize(ValueObject vo, System.Action destroy) {
+            transform.position = vo.Position;
             _destroy = destroy;
-            transform.position = position;
         }
 
         public virtual void UpdatePosition(Vector3 position) {

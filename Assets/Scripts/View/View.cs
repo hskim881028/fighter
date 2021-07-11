@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Fighter.View {
     public abstract class View : MonoBehaviour, IView {

@@ -6,16 +6,16 @@ namespace Fighter.UI {
         private readonly View.UIView _view;
         public bool IsActive { get; private set; }
 
-        public UI(UIType type, View.UIView view, Vector3 position) {
+        public UI(UIType type, View.UIView view, ValueObject.ValueObject vo) {
             IsActive = true;
             Type = type;
             _view = view;
-            _view.Initialize(Destroy, position);
+            _view.Initialize(vo, Destroy);
         }
 
-        public void Respawn(Vector3 position) {
+        public void Respawn(ValueObject.ValueObject vo) {
             _view.gameObject.SetActive(true);
-            _view.Initialize(Destroy, position);
+            _view.Initialize(vo, Destroy);
             IsActive = true;
         }
 

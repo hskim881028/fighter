@@ -1,4 +1,5 @@
 ﻿using Fighter.Manager;
+using Fighter.UI.ValueObject;
 
 namespace Fighter.Action {
     public class HitAction : IAction {
@@ -13,7 +14,8 @@ namespace Fighter.Action {
 
         public void Execute() {
             _defender.HP.Value -= _attacker.Damage.Value;
-            UIManager.CloneDamage(_defender.Position.Value);
+            var vo = new DamageVO(_defender.Position.Value, _attacker.Damage.Value);
+            UIManager.CloneDamage(vo);
             if (_defender.HP.Value <= 0) {
                 _defender.Active.Value = false;
                 CloneManager.Destroy(_defender.ID);

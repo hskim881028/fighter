@@ -14,10 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloneType: 2
   Data:
-  - Position: {x: 0, y: 0, z: 0}
-    Direction: {x: 0, y: 0, z: 0}
-    Look: {x: 0, y: 0, z: 0}
-    Speed: 3
+  - Look: {x: 0, y: 0, z: 0}
+    Speed: 10
     Damage: 10
     Hp: 0
     Range: 2
