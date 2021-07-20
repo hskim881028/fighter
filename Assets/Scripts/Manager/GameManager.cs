@@ -6,15 +6,15 @@ using System.Linq;
 using Fighter.Data;
 using Fighter.Enum;
 using Fighter.Factory;
-using Fighter.UI;
+using Fighter.Effect;
 
 namespace Fighter.Manager {
     public static class GameManager {
         private static readonly Dictionary<CloneType, List<GameObject>> Clones =
             new Dictionary<CloneType, List<GameObject>>();
         
-        private static readonly Dictionary<UIType, List<GameObject>> UIs =
-            new Dictionary<UIType, List<GameObject>>();
+        private static readonly Dictionary<EffectType, List<GameObject>> Effects =
+            new Dictionary<EffectType, List<GameObject>>();
 
         private static readonly Dictionary<CloneType, List<IData>> Datas = new Dictionary<CloneType, List<IData>>();
 
@@ -25,9 +25,9 @@ namespace Fighter.Manager {
                 Clones.Add(prefab.CloneType, prefab.Data);
             }
             
-            var uis = scriptableObjects.OfType<UIScriptableObject>();
-            foreach (var ui in uis) {
-                UIs.Add(ui.UIType, ui.Data);
+            var effects = scriptableObjects.OfType<EffectScriptableObject>();
+            foreach (var effect in effects) {
+                Effects.Add(effect.effectType, effect.Data);
             }
 
             var datas = scriptableObjects.OfType<DataScriptableObject>();
@@ -47,9 +47,9 @@ namespace Fighter.Manager {
             }
         }
         
-        public static GameObject GetUI(UIType type, int id) {
+        public static GameObject GetEffect(EffectType type, int id) {
             try {
-                return UIs[type][id];
+                return Effects[type][id];
             }
             catch (Exception e) {
                 Console.WriteLine(e);

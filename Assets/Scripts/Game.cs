@@ -1,9 +1,5 @@
 ﻿using Fighter.Action;
-using Fighter.Enum;
 using Fighter.Manager;
-using Fighter.Model;
-using Fighter.Presenter;
-using Fighter.View;
 using UnityEngine;
 
 namespace Fighter {
@@ -12,22 +8,20 @@ namespace Fighter {
 
         [SerializeField] private InputManager inputManager;
         private readonly ActionHandler _actionHandler = new ActionHandler();
+        private readonly Stage _stage = new Stage();
 
         public InputManager InputManager => inputManager;
 
         private void Awake() {
             Instance = this;
             GameManager.Initialize();
-            UIManager.Initialize();
+            EffectManager.Initialize();
             CloneManager.Initialize(_actionHandler);
-            CloneManager.Clone<Character, PlayerView, PlayerPresenter>(CloneType.Player, Vector3.zero, Vector3.zero);
-            for (int i = 0; i < 5; i++) {
-                CloneManager.Clone<Enemy, EnemyView, EnemyPresenter>(CloneType.Enemy, new Vector3(i + 1, 0, 0),
-                                                                     Vector3.zero);
-            }
+            _stage.Initialize();
         }
 
         private void Update() {
+            _stage.Update();
             CloneManager.UpdateAll();
         }
 

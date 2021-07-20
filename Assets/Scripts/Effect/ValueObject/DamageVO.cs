@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Fighter.UI.ValueObject {
+namespace Fighter.Effect.ValueObject {
     public readonly struct DamageVO : ValueObject {
         public Vector3 Position { get; }
         public float Damage { get; }

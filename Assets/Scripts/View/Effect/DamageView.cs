@@ -1,11 +1,11 @@
 ﻿using System.Globalization;
 using DG.Tweening;
-using Fighter.UI.ValueObject;
+using Fighter.Effect.ValueObject;
 using TMPro;
 using UnityEngine;
 
-namespace Fighter.View.UI {
-    public class DamageView : UIView {
+namespace Fighter.View.Effect {
+    public class DamageView : EffectView {
         [SerializeField] private TextMeshPro damage;
         
         private const float _move = 0.5f;
