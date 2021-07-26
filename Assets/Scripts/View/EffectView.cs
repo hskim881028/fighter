@@ -1,8 +1,8 @@
-﻿using Fighter.UI.ValueObject;
+﻿using Fighter.Effect.ValueObject;
 using UnityEngine;
 
 namespace Fighter.View {
-    public class UIView : MonoBehaviour, IView {
+    public class EffectView : MonoBehaviour, IView {
         private System.Action _destroy;
 
         public virtual void Initialize(ValueObject vo, System.Action destroy) {

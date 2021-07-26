@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 
-namespace Fighter.UI {
-    public class UI {
-        public UIType Type { get; }
-        private readonly View.UIView _view;
+namespace Fighter.Effect {
+    public class Effect {
+        public EffectType Type { get; }
+        private readonly View.EffectView _view;
         public bool IsActive { get; private set; }
 
-        public UI(UIType type, View.UIView view, ValueObject.ValueObject vo) {
+        public Effect(EffectType type, View.EffectView view, ValueObject.ValueObject vo) {
             IsActive = true;
             Type = type;
             _view = view;
